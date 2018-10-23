@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Weather IO</string>
     <string name="SensorButton">Your Sensor</string>
-    <string name="button2">Toronto</string>
+    <string name="city">Toronto</string>
     <string name="sensorTemp">Current Temperature</string>
     <string name="sensorHumidity">Current Humidity</string>
     <string name="city2">City 2</string>
@@ -9,5 +9,9 @@
     <string name="city4">City 4</string>
     <string name="Temp">20</string>
     <string name="Humidity">55 %</string>
+    <string name="add_city">Add City</string>
+    <string name="add_sensor">Add Sensor</string>
+    <string name="header_title">Weather I/O</string>
+
 
 </resources>

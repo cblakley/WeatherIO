@@ -1,3 +1,9 @@
+/*
+Colin Blakley
+Brandon Lo
+Brian Phan
+
+ */
 package colin.weatherio;
 
 import android.support.v7.app.AppCompatActivity;
