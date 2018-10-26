@@ -54,6 +54,13 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent2 = new Intent(MainActivity.this,SensorActivity.class);
                                 startActivity(intent2);
                                 break;
+                            case R.id.nav_add_city:
+                                // add code to go to add a new city activity
+                                break;
+                            case R.id.nav_add_sensor:
+                                Intent intent4 = new Intent(MainActivity.this,SensorSetUp.class);
+                                startActivity(intent4);
+                                break;
 
                         }
 
