@@ -54,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intent2 = new Intent(MainActivity.this,SensorActivity.class);
                                 startActivity(intent2);
                                 break;
-
+                            case R.id.nav_add_sensor:
+                                Intent intent3 = new Intent(MainActivity.this,AddSensor.class);
+                                startActivity(intent3);
+                                break;
                         }
 
 
