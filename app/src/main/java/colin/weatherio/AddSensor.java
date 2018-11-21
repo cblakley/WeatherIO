@@ -1,5 +1,6 @@
 package colin.weatherio;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,44 +9,55 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class AddSensor extends AppCompatActivity {
     TextView Sensor_Serial_Number;
     TextView Name;
     EditText Your_Name;
     EditText Serial_Num;
     Button sndBtn;
+    DBAdapter db;
+    String NameDB;
+    String SerialNumDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_sensor);
 
-        final DBAdapter db = new DBAdapter(this);
+        db = new DBAdapter(this);
+        //db.open("MyDB.db");
         Your_Name = (EditText)findViewById(R.id.Your_Name);
         Serial_Num = (EditText)findViewById(R.id.Serial_Num);
         sndBtn = (Button)findViewById(R.id.sndBtn);
 
-        final String NameDB =Your_Name.getText().toString();
-        final String SerialNumDB = Serial_Num.getText().toString();
+
 
         sndBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String NameDB =Your_Name.getText().toString();
-                String SerialNumDB = Serial_Num.getText().toString();
+                    if (Serial_Num.length() >= 5 && Your_Name.length() >= 0) {
+                        NameDB = Your_Name.getText().toString();
+                        SerialNumDB = Serial_Num.getText().toString();
 
-                if(Serial_Num.length()>5 && Your_Name.length()>0){
-                    db.insertSensor(SerialNumDB,NameDB);
-                }else{
-                    Toast.makeText(getBaseContext(),"Enter a name or valid Serial Number",Toast.LENGTH_LONG);
+                        db.insertSensor(NameDB,SerialNumDB);
+                        Intent intent3 = new Intent(AddSensor.this, SensorActivity.class);
+                        startActivity(intent3);
 
-                }
-            }
+                    } else {
+                        Toast.makeText(getBaseContext(), "Enter a name or valid Serial Number", Toast.LENGTH_LONG).show();
+
+                    }
+
+             db.close();
+        }
         });
 
 
 
 
-    }
+        }
 }

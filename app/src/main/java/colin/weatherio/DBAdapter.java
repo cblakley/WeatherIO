@@ -8,24 +8,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DBAdapter {
+public class DBAdapter{
     static final String KEY_ROWID = "_id";
     static final String KEY_NAME = "name";
     static final String KEY_SERIAL_NUMBER = "serial_number";
     static final String TAG = "DBAdapter";
 
-    static final String DATABASE_NAME = "MyDB";
-    static final String DATABASE_TABLE1 = "contacts";
-    static final String DATABASE_TABLE2 = "comments";
+    static final String DATABASE_NAME = "MyDB.db";
+    static final String DATABASE_TABLE = "sensor";
+
     static final int DATABASE_VERSION = 2;
 
-    static final String DATABASE_CREATE1 =
-            "create table contacts (_id integer primary key autoincrement, "
-                    + "name text not null, serial_number number not null);";
+    static final String DATABASE_CREATE =
+            "create table sensors (_id integer primary key autoincrement, "
+                    + "name text not null, serial_number text not null);";
 
-    static final String DATABASE_CREATE2 =
-            "CREATE TABLE IF NOT EXISTS comments (id integer primary key autoincrement, "
-                    + "comments text not null, email text not null);";
+
 
     final Context context;
 
@@ -53,7 +51,7 @@ public class DBAdapter {
         public void onCreate(SQLiteDatabase db)
         {
             try {
-                db.execSQL(DATABASE_CREATE1);
+                db.execSQL(DATABASE_CREATE);
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -65,7 +63,7 @@ public class DBAdapter {
         {
             Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
                     + newVersion + ", which will destroy all old data");
-            db.execSQL("DROP TABLE IF EXISTS contacts");
+            db.execSQL("DROP TABLE IF EXISTS sensor");
             onCreate(db);
         }
     }
@@ -87,24 +85,25 @@ public class DBAdapter {
     }
 
     //---insert a contact into the database---
-    public long insertSensor(String name, String serial_number)
+    public boolean insertSensor(String name, String serial_number)
     {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_NAME, name);
         initialValues.put(KEY_SERIAL_NUMBER, serial_number);
-        return db.insert(DATABASE_TABLE1, null, initialValues);
+        db.insert(DATABASE_TABLE, null, initialValues);
+        return true;
     }
 
     //---deletes a particular contact---
-    public boolean deleteContact(long rowId)
+    public boolean deleteSensor(long rowId)
     {
-        return db.delete(DATABASE_TABLE1, KEY_ROWID + "=" + rowId, null) > 0;
+        return db.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
     //---retrieves all the contacts---
     public Cursor getAllSensors()
     {
-        return db.query(DATABASE_TABLE1, new String[] {KEY_ROWID, KEY_NAME,
+        return db.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_NAME,
                 KEY_SERIAL_NUMBER}, null, null, null, null, null);
     }
 
@@ -112,7 +111,7 @@ public class DBAdapter {
     public Cursor getSensor(long rowId) throws SQLException
     {
         Cursor mCursor =
-                db.query(true, DATABASE_TABLE1, new String[] {KEY_ROWID,
+                db.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,
                                 KEY_NAME, KEY_SERIAL_NUMBER}, KEY_ROWID + "=" + rowId, null,
                         null, null, null, null);
         if (mCursor != null) {
@@ -127,7 +126,7 @@ public class DBAdapter {
         ContentValues args = new ContentValues();
         args.put(KEY_NAME, name);
         args.put(KEY_SERIAL_NUMBER, serial_number);
-        return db.update(DATABASE_TABLE1, args, KEY_ROWID + "=" + rowId, null) > 0;
+        return db.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
 
