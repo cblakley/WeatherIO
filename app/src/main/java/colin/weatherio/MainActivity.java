@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -51,19 +52,16 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 break;
                             case R.id.nav_sensor:
-                                Intent intent2 = new Intent(MainActivity.this,SensorActivity.class);
-                                startActivity(intent2);
+
+                                    Intent intent2 = new Intent(MainActivity.this, SensorActivity.class);
+                                    startActivity(intent2);
+
                                 break;
                             case R.id.nav_add_sensor:
                                 Intent intent3 = new Intent(MainActivity.this,AddSensor.class);
                                 startActivity(intent3);
                                 break;
                         }
-
-
-
-
-
 
                         return true;
                     }

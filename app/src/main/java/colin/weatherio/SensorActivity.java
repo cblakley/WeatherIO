@@ -6,14 +6,16 @@ Brian Phan
  */
 package colin.weatherio;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
+
+import static android.os.SystemClock.sleep;
 
 public class SensorActivity extends AppCompatActivity {
 
@@ -25,12 +27,23 @@ public class SensorActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         */
-        TextView tv1 = (TextView)findViewById(R.id.editText);
-        tv1.setText(randomData());
 
-        TextView tv2 = (TextView)findViewById(R.id.editText2);
-        tv2.setText(randomData());
+        try {
 
+            while (true) {
+
+                TextView tv1 = (TextView) findViewById(R.id.editText);
+                tv1.setText(randomData());
+
+                TextView tv2 = (TextView) findViewById(R.id.editText2);
+                tv2.setText(randomData() + "%");
+                Thread.sleep(1000);
+
+
+            }
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
     public String randomData(){
         int data;

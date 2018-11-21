@@ -15,7 +15,7 @@ public class DBAdapter{
     static final String TAG = "DBAdapter";
 
     static final String DATABASE_NAME = "MyDB.db";
-    static final String DATABASE_TABLE = "sensor";
+    static final String DATABASE_TABLE = "sensors";
 
     static final int DATABASE_VERSION = 2;
 
@@ -87,6 +87,7 @@ public class DBAdapter{
     //---insert a contact into the database---
     public boolean insertSensor(String name, String serial_number)
     {
+        db = DBHelper.getWritableDatabase();
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_NAME, name);
         initialValues.put(KEY_SERIAL_NUMBER, serial_number);
