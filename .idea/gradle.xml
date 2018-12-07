@@ -8,7 +8,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ColinAssign3" />
             <option value="$PROJECT_DIR$/Databases" />
+            <option value="$PROJECT_DIR$/Fragments" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
