@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name" translatable="false">Weather IO</string>
+    <string name="SensorButton">Your Sensor</string>
+    <string name="city" translatable="false">Toronto</string>
+    <string name="sensorTemp">Current Temperature</string>
+    <string name="sensorHumidity">Current Humidity</string>
+
+    <string name="Temp" translatable="false">20</string>
+    <string name="Humidity" translatable="false">55 %</string>
+    <string name="add_city">Add City</string>
+    <string name="add_sensor">Add Sensor</string>
+    <string name="header_title" translatable="false">Weather I/O</string>
+    <string name="Name">Your Name</string>
+    <string name="Sensor_Serial_Number">Enter Your Sensor Serial Number</string>
+    <string name="Serial_Num">Serial Number</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="CityName">City Name</string>
+    <string name="cityHint" translatable="false">Toronto</string>
+    <string name="countryCode" translatable="false">CA</string>
+    <string name="GetWeatherInfo">Get Weather</string>
+    <string name="weather">Get Weather</string>
+    <string name="info">Info</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
+
+
+</resources>

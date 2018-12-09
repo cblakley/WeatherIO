@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="SensorButton">Ton Capteur</string>
+    <string name="sensorTemp">Température Actuelle</string>
+    <string name="sensorHumidity">Humidité Actuelle</string>
+    <string name="add_city">Ajouter Ville</string>
+    <string name="add_sensor">Ajouter Capteur</string>
+    <string name="Name">Ton Nom</string>
+    <string name="Sensor_Serial_Number">Entrez Votre Numéro de Série</string>
+    <string name="Serial_Num">Numéro de Série</string>
+    <string name="CityName">Nom de Ville</string>
+    <string name="GetWeatherInfo">Obtenir la Météo</string>
+    <string name="weather">Obtenir la Météo</string>
+    <string name="info">Info</string>
+    <string name="settings">"Réglage "</string>
+    <string name="about">Au Sujet De</string>
+</resources>
