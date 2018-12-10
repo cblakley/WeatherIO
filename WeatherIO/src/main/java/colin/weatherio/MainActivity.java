@@ -19,17 +19,22 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+    int[] images={R.drawable.ic_chancerain,R.drawable.ic_clear,R.drawable.ic_snow};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+       displayHomeImage();
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -120,6 +125,13 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
         return true;
+    }
+    public void displayHomeImage(){
+
+        int x = (int) (Math.random() * 3);
+
+        ImageView img = (ImageView) findViewById(R.id.img);
+        img.setImageResource(images[x]);
     }
 
 

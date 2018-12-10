@@ -14,4 +14,6 @@
     <string name="info">Info</string>
     <string name="settings">"Réglage "</string>
     <string name="about">Au Sujet De</string>
+    <string name="homeScreenIamge">partiellement nuageux</string>
+    <string name="weather_icon">Icône météo</string>
 </resources>

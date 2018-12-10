@@ -28,6 +28,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+
 public class CityActivity extends AppCompatActivity {
 
     private String TAG = CityActivity.class.getSimpleName();
@@ -46,6 +52,9 @@ public class CityActivity extends AppCompatActivity {
     TextView textView5;
     String url1 = "https://api.openweathermap.org/data/2.5/weather?q=";
     String apiKey = "&appid=b2d8cf9973b9ee3bde5be5f7e4d25a7f";
+
+    ImageView img;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,15 +90,13 @@ public class CityActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(String... strings) {
 
-            HttpHandler sh = new HttpHandler();
+            final HttpHandler sh = new HttpHandler();
 
             // Making a request to url and getting response
             final String jsonStr = sh.makeServiceCall(url);
 
             Log.e(TAG, "Response from url: " + jsonStr);
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+
                     if (jsonStr != null) {
                         try {
 
@@ -97,30 +104,48 @@ public class CityActivity extends AppCompatActivity {
                             //weather object
                             JSONArray jArr = jsonObj.getJSONArray("weather");
                             JSONObject weather = jArr.getJSONObject(0);
-                            String condition = weather.getString("main");
-                            String description = weather.getString("description");
+                            final String condition = weather.getString("main");
+                            final String description = weather.getString("description");
+                            final String icon = weather.getString("icon");
 
-                            String name = jsonObj.getString("name");
+                            final String name = jsonObj.getString("name");
 
                             JSONObject main = jsonObj.getJSONObject("main");
 
                             String humidity = main.getString("humidity");
-                            String temp = main.getString("temp");
+                            final String temp = main.getString("temp");
 
-                            textView = (TextView) findViewById(R.id.temp);
-                            textView2 = (TextView) findViewById(R.id.humidity);
-                            textView3 = (TextView) findViewById(R.id.main);
-                            textView4 = (TextView) findViewById(R.id.description);
-                            textView5 = (TextView) findViewById(R.id.cityname);
+                            final byte[] iconData = sh.getImage(icon);
 
-                            textView5.setText(name);
-                            textView.setText(getRealTemp(temp));//method to change the passed value to Celuis
-                            textView2.setText(condition);
-                            textView3.setText(description);
-                            textView4.setText(humidity);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    textView = (TextView) findViewById(R.id.temp);
+                                    textView2 = (TextView) findViewById(R.id.humidity);
+                                    textView3 = (TextView) findViewById(R.id.main);
+                                    textView4 = (TextView) findViewById(R.id.description);
+                                    textView5 = (TextView) findViewById(R.id.cityname);
 
+                                    textView5.setText(name);
+                                    textView.setText(getRealTemp(temp));//method to change the passed value to Celius
+                                    textView2.setText(condition);
+                                    textView3.setText(description);
+                                    textView4.setText(icon);
 
+                                    img = (ImageView) findViewById(R.id.img);
+                                    if (iconData != null && iconData.length > 0) {
+                                        Bitmap wIcon = BitmapFactory.decodeByteArray(iconData, 0, iconData.length);
+                                        img.setImageBitmap(wIcon);
 
+                                    } else {
+                                        Toast.makeText(getApplicationContext(),
+                                                "Couldn't get image data",
+                                                Toast.LENGTH_LONG)
+                                                .show();
+                                    }
+
+                                }
+                            });
 
                         } catch (final JSONException e) {
                             Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -135,7 +160,6 @@ public class CityActivity extends AppCompatActivity {
                             });
 
                         }
-
                     } else {
                         Log.e(TAG, "Couldn't get json from server.");
                         runOnUiThread(new Runnable() {
@@ -151,8 +175,8 @@ public class CityActivity extends AppCompatActivity {
                     }
 
 
-                }
-            });
+
+
             return null;
         }
 
@@ -160,12 +184,15 @@ public class CityActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
 
-                }
-            });
+
+
+
+
+
+
+
+
 
 
         }

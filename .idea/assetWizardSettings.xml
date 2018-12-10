@@ -88,8 +88,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_back" />
-                            <entry key="sourceFile" value="C:\Users\Colin" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_snow" />
+                            <entry key="sourceFile" value="C:\Users\Colin\Downloads\weather images\snow.svg" />
                           </map>
                         </option>
                       </PersistentState>

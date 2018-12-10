@@ -23,6 +23,8 @@
     <string name="info">Info</string>
     <string name="about">About</string>
     <string name="settings">Settings</string>
+    <string name="homeScreenIamge">partly cloudy</string>
+    <string name="weather_icon">Weather Icon</string>
 
 
 </resources>

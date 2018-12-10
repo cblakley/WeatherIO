@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CityActivity">
+    tools:context=".CityActivity"
+    tools:layout_editor_absoluteY="25dp">
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/content_frame"
@@ -12,10 +13,8 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -33,7 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="134dp"
         android:layout_marginTop="50dp"
+        android:layout_marginBottom="211dp"
         android:text="@string/CityName"
+        app:layout_constraintBottom_toTopOf="@+id/temp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,50 +42,56 @@
         android:id="@+id/temp"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="227dp"
         android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/humidity"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/humidity"
         app:layout_constraintStart_toStartOf="@+id/humidity"
-        app:layout_constraintTop_toBottomOf="@+id/inputCity" />
+        app:layout_constraintTop_toBottomOf="@+id/cityname" />
 
     <TextView
         android:id="@+id/humidity"
-        android:layout_width="113dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="165dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginBottom="4dp"
         android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/main"
+        app:layout_constraintBottom_toTopOf="@+id/main"
+        app:layout_constraintEnd_toStartOf="@+id/weatherImage"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temp" />
 
     <TextView
         android:id="@+id/main"
-        android:layout_width="112dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="404dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="4dp"
         android:text=""
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/description"
+        app:layout_constraintEnd_toEndOf="@+id/humidity"
+        app:layout_constraintStart_toStartOf="@+id/humidity"
+        app:layout_constraintTop_toBottomOf="@+id/humidity" />
 
     <TextView
         android:id="@+id/description"
-        android:layout_width="112dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="468dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="39dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/main"
+        app:layout_constraintStart_toStartOf="@+id/main"
+        app:layout_constraintTop_toBottomOf="@+id/main" />
 
     <EditText
         android:id="@+id/inputCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
-        android:layout_marginBottom="138dp"
+        android:layout_marginBottom="27dp"
         android:hint="@string/cityHint"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/temp"
+        app:layout_constraintBottom_toTopOf="@+id/inputCountry"
         app:layout_constraintStart_toStartOf="@+id/content_frame"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,10 +99,11 @@
         android:id="@+id/inputCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
+        android:layout_marginBottom="65dp"
         android:hint="@string/countryCode"
         android:inputType="text"
         android:maxLength="2"
+        app:layout_constraintBottom_toTopOf="@+id/temp"
         app:layout_constraintStart_toStartOf="@+id/content_frame"
         app:layout_constraintTop_toBottomOf="@+id/inputCity" />
 
@@ -103,7 +111,21 @@
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
         android:text="@string/GetWeatherInfo"
-        app:layout_constraintStart_toStartOf="@+id/content_frame"
-        app:layout_constraintTop_toBottomOf="@+id/inputCountry" />
+        app:layout_constraintBottom_toTopOf="@+id/temp"
+        app:layout_constraintStart_toStartOf="@+id/content_frame" />
+
+    <ImageView
+        android:id="@+id/weatherImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/humidity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/humidity"
+        app:layout_constraintTop_toTopOf="@+id/humidity"
+        android:contentDescription="@string/weather_icon" />
 </android.support.constraint.ConstraintLayout>

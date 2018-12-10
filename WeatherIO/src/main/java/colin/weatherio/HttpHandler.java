@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,6 +20,7 @@ import java.net.URL;
 public class HttpHandler {
 
     private static final String TAG = HttpHandler.class.getSimpleName();
+
 
     public HttpHandler() {
     }
@@ -63,5 +65,41 @@ public class HttpHandler {
             }
         }
         return sb.toString();
+    }
+    public byte[] getImage(String code) {
+        HttpURLConnection con = null;
+        InputStream is = null;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            String IMG_URL = "https://openweathermap.org/img/w/";
+            con = (HttpURLConnection) (new URL(IMG_URL + code + ".png")).openConnection();
+            con.setRequestMethod("GET");
+            con.setDoInput(true);
+            con.setDoOutput(true);
+            con.connect();
+
+            // Let's read the response
+            is = con.getInputStream();
+            byte[] buffer = new byte[1024];
+
+
+            while (is.read(buffer) != -1)
+                baos.write(buffer);
+
+
+        } catch (Throwable t) {
+            t.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (Throwable t) {
+            }
+            try {
+                con.disconnect();
+            } catch (Throwable t) {
+            }
+        }
+
+        return baos.toByteArray();
     }
 }
