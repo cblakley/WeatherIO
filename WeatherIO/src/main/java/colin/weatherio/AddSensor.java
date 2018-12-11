@@ -1,6 +1,8 @@
+//Colin Blakley
 package colin.weatherio;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -75,13 +77,22 @@ public class AddSensor extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.settings:
+                Intent intent = new Intent(AddSensor.this,SettingsActivity.class);
+                startActivity(intent);
 
                 return true;
-            case R.id.info:
+            case R.id.git:
+                Intent intent1 = new Intent();
+                intent1.setAction(Intent.ACTION_VIEW);
+                intent1.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent1.setData(Uri.parse("https://github.com/cblakley/WeatherIO"));
+                startActivity(intent1);
+
 
                 return true;
             case R.id.about:
-
+                Intent intent2 = new Intent(AddSensor.this,About.class);
+                startActivity(intent2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

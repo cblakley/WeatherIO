@@ -1,14 +1,16 @@
 /*
 Colin Blakley
-Brandon Lo
-Brian Phan
+
+
 
  */
 package colin.weatherio;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,6 +49,9 @@ public class CityActivity extends AppCompatActivity {
     String url1 = "https://api.openweathermap.org/data/2.5/weather?q=";
     String apiKey = "&appid=b2d8cf9973b9ee3bde5be5f7e4d25a7f";
 
+    ImageView weatherIcon;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,15 +86,14 @@ public class CityActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(String... strings) {
 
-            HttpHandler sh = new HttpHandler();
+            final HttpHandler sh = new HttpHandler();
 
             // Making a request to url and getting response
             final String jsonStr = sh.makeServiceCall(url);
 
+
             Log.e(TAG, "Response from url: " + jsonStr);
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+
                     if (jsonStr != null) {
                         try {
 
@@ -97,30 +101,53 @@ public class CityActivity extends AppCompatActivity {
                             //weather object
                             JSONArray jArr = jsonObj.getJSONArray("weather");
                             JSONObject weather = jArr.getJSONObject(0);
-                            String condition = weather.getString("main");
-                            String description = weather.getString("description");
+                            final String condition = weather.getString("main");
+                            final String description = weather.getString("description");
+                            final String icon = weather.getString("icon");
 
-                            String name = jsonObj.getString("name");
+                            final String name = jsonObj.getString("name");
 
                             JSONObject main = jsonObj.getJSONObject("main");
 
-                            String humidity = main.getString("humidity");
-                            String temp = main.getString("temp");
+                            final String humidity = main.getString("humidity");
+                            final String temp = main.getString("temp");
 
-                            textView = (TextView) findViewById(R.id.temp);
-                            textView2 = (TextView) findViewById(R.id.humidity);
-                            textView3 = (TextView) findViewById(R.id.main);
-                            textView4 = (TextView) findViewById(R.id.description);
-                            textView5 = (TextView) findViewById(R.id.cityname);
-
-                            textView5.setText(name);
-                            textView.setText(getRealTemp(temp));//method to change the passed value to Celuis
-                            textView2.setText(condition);
-                            textView3.setText(description);
-                            textView4.setText(humidity);
+                            //get weather icon
+                            final Bitmap iconData = sh.getImage(icon);
 
 
+                            runOnUiThread(new Runnable() {
+                                @SuppressLint("SetTextI18n")
+                                @Override
+                                public void run() {
+                                    textView = (TextView) findViewById(R.id.temp2);
+                                    textView2 = (TextView) findViewById(R.id.humidity2);
+                                    textView3 = (TextView) findViewById(R.id.main2);
+                                    textView4 = (TextView) findViewById(R.id.description2);
+                                    textView5 = (TextView) findViewById(R.id.cityname);
 
+                                    textView5.setText(name);
+                                    textView.setText(getRealTemp(temp) +"C");//method to change the passed value to Celius
+                                    textView2.setText(humidity + "%");
+                                    textView3.setText(condition);
+                                    textView4.setText(description);
+
+
+
+                                    if (iconData != null) {
+                                        weatherIcon = (ImageView) findViewById(R.id.weatherImage);
+                                        Bitmap wIcon = iconData;
+                                        weatherIcon.setImageBitmap(wIcon);
+
+                                    } else {
+                                        Toast.makeText(getApplicationContext(),
+                                                "Couldn't get image data",
+                                                Toast.LENGTH_LONG)
+                                                .show();
+                                    }
+
+                                }
+                            });
 
                         } catch (final JSONException e) {
                             Log.e(TAG, "Json parsing error: " + e.getMessage());
@@ -135,7 +162,6 @@ public class CityActivity extends AppCompatActivity {
                             });
 
                         }
-
                     } else {
                         Log.e(TAG, "Couldn't get json from server.");
                         runOnUiThread(new Runnable() {
@@ -150,9 +176,6 @@ public class CityActivity extends AppCompatActivity {
 
                     }
 
-
-                }
-            });
             return null;
         }
 
@@ -160,25 +183,15 @@ public class CityActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            });
-
 
         }
 
 
     }
 
-
-
     private String getRealTemp(String temp) {
         double dTemp = Math.round(Double.parseDouble(temp) - 273.15);
-        String realTemp = Double.toString(dTemp);
-        return realTemp;
+        return Double.toString(dTemp);
 
     }
 
@@ -193,12 +206,22 @@ public class CityActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.settings:
+                Intent intent = new Intent(CityActivity.this,SettingsActivity.class);
+                startActivity(intent);
 
                 return true;
-            case R.id.info:
+            case R.id.git:
+                Intent intent1 = new Intent();
+                intent1.setAction(Intent.ACTION_VIEW);
+                intent1.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent1.setData(Uri.parse("https://github.com/cblakley/WeatherIO"));
+                startActivity(intent1);
+
 
                 return true;
             case R.id.about:
+                Intent intent2 = new Intent(CityActivity.this,About.class);
+                startActivity(intent2);
 
                 return true;
             default:

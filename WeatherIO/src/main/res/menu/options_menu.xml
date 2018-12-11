@@ -10,18 +10,19 @@
         style="@style/AppTheme"
         />
     <item
+        android:title="@string/github"
+        android:orderInCategory="2"
+        app:showAsAction="never"
+        android:id="@+id/git"
+        style="@style/AppTheme"
+        />
+    <item
         android:title="@string/about"
         android:orderInCategory="2"
         app:showAsAction="never"
         android:id="@+id/about"
         style="@style/AppTheme"
         />
-    <item
-        android:title="@string/info"
-        android:orderInCategory="1"
-        app:showAsAction="never"
-        android:id="@+id/info"
-        style="@style/AppTheme"
-        />
+
 
 </menu>

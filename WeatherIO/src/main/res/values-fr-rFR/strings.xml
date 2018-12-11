@@ -14,4 +14,25 @@
     <string name="info">Info</string>
     <string name="settings">"Réglage "</string>
     <string name="about">Au Sujet De</string>
+    <string name="homeScreenIamge">partiellement nuageux</string>
+    <string name="weather_icon">Icône météo</string>
+    <string name="weatherTemp">Température</string>
+    <string name="weatherHumidity">Humidité</string>
+    <string name="weatherMain">Conditions</string>
+    <string name="weatherDesc">Description</string>
+    <string name="aboutText">Weather I / O est développé par Colin Blakley. Ceci est un projet pour mon cours de projet logiciel en technologie du génie informatique au Collège Humber.</string>
+    <string name="pref_title_vibrate">vibrer</string>
+    <string name="pref_ringtone_silent">silencieux</string>
+    <string name="pref_title_ringtone">sonnerie</string>
+    <string name="pref_title_new_message_notifications">notification de nouveau message</string>
+    <string name="pref_header_notifications">notifications</string>
+    <string name="pref_title_system_sync_settings">paramètres de synchronisation du système</string>
+    <string name="pref_title_sync_frequency">fréquence de synchronisation</string>
+    <string name="pref_header_data_sync">Données et synchronisation</string>
+    <string name="pref_title_add_friends_to_messages">Ajouter des amis aux messages</string>
+    <string name="pref_title_display_name">Afficher un nom</string>
+    <string name="pref_description_social_recommendations">Recommandations pour les personnes à contacter en fonction de l\'historique de vos messages</string>
+    <string name="pref_title_social_recommendations">Activer les recommandations sociales</string>
+    <string name="pref_header_general">général</string>
+    <string name="title_activity_settings">réglages</string>
 </resources>

@@ -1,9 +1,13 @@
+//Colin Blakley
 package colin.weatherio;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,6 +23,7 @@ import java.net.URL;
 public class HttpHandler {
 
     private static final String TAG = HttpHandler.class.getSimpleName();
+
 
     public HttpHandler() {
     }
@@ -63,5 +68,23 @@ public class HttpHandler {
             }
         }
         return sb.toString();
+    }
+    public Bitmap getImage(String code) {
+            //code from https://medium.com/@crossphd/android-image-loading-from-a-string-url-6c8290b82c5e
+        try {
+            String IMG_URL = "https://openweathermap.org/img/w/";
+           HttpURLConnection con = (HttpURLConnection) (new URL(IMG_URL + code + ".png")).openConnection();
+            con.setRequestMethod("GET");
+            con.setDoInput(true);
+            InputStream input = con.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+
+        } catch (IOException t) {
+            t.printStackTrace();
+            return null;
+        }
+
+
     }
 }
