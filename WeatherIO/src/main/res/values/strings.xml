@@ -10,9 +10,9 @@
     <string name="add_city">Add City</string>
     <string name="add_sensor">Add Sensor</string>
     <string name="header_title" translatable="false">Weather I/O</string>
-    <string name="Name">Your Name</string>
+    <string name="Name">Your Name ex. John Smith</string>
     <string name="Sensor_Serial_Number">Enter Your Sensor Serial Number</string>
-    <string name="Serial_Num">Serial Number</string>
+    <string name="Serial_Num">Serial Number ex.12345</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="CityName">City Name</string>

@@ -5,9 +5,9 @@
     <string name="sensorHumidity">Humidité Actuelle</string>
     <string name="add_city">Ajouter Ville</string>
     <string name="add_sensor">Ajouter Capteur</string>
-    <string name="Name">Ton Nom</string>
+    <string name="Name">Ton Nom ex. John Smith</string>
     <string name="Sensor_Serial_Number">Entrez Votre Numéro de Série</string>
-    <string name="Serial_Num">Numéro de Série</string>
+    <string name="Serial_Num">Numéro de Série ex.12345</string>
     <string name="CityName">Nom de Ville</string>
     <string name="GetWeatherInfo">Obtenir la Météo</string>
     <string name="weather">Obtenir la Météo</string>

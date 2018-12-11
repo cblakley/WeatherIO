@@ -50,6 +50,7 @@
         android:ems="10"
         android:hint="@string/Serial_Num"
         android:inputType="number"
+        android:maxLength="5"
         app:layout_constraintBottom_toTopOf="@+id/Name"
         app:layout_constraintStart_toStartOf="parent" />
 
