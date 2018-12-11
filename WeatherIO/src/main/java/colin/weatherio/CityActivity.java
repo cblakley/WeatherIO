@@ -1,14 +1,16 @@
 /*
 Colin Blakley
-Brandon Lo
-Brian Phan
+
+
 
  */
 package colin.weatherio;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,12 +29,6 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 
 public class CityActivity extends AppCompatActivity {
 
@@ -53,7 +49,7 @@ public class CityActivity extends AppCompatActivity {
     String url1 = "https://api.openweathermap.org/data/2.5/weather?q=";
     String apiKey = "&appid=b2d8cf9973b9ee3bde5be5f7e4d25a7f";
 
-    ImageView img;
+    ImageView weatherIcon;
 
 
     @Override
@@ -95,6 +91,7 @@ public class CityActivity extends AppCompatActivity {
             // Making a request to url and getting response
             final String jsonStr = sh.makeServiceCall(url);
 
+
             Log.e(TAG, "Response from url: " + jsonStr);
 
                     if (jsonStr != null) {
@@ -112,30 +109,35 @@ public class CityActivity extends AppCompatActivity {
 
                             JSONObject main = jsonObj.getJSONObject("main");
 
-                            String humidity = main.getString("humidity");
+                            final String humidity = main.getString("humidity");
                             final String temp = main.getString("temp");
 
-                            final byte[] iconData = sh.getImage(icon);
+                            //get weather icon
+                            final Bitmap iconData = sh.getImage(icon);
+
 
                             runOnUiThread(new Runnable() {
+                                @SuppressLint("SetTextI18n")
                                 @Override
                                 public void run() {
-                                    textView = (TextView) findViewById(R.id.temp);
-                                    textView2 = (TextView) findViewById(R.id.humidity);
-                                    textView3 = (TextView) findViewById(R.id.main);
-                                    textView4 = (TextView) findViewById(R.id.description);
+                                    textView = (TextView) findViewById(R.id.temp2);
+                                    textView2 = (TextView) findViewById(R.id.humidity2);
+                                    textView3 = (TextView) findViewById(R.id.main2);
+                                    textView4 = (TextView) findViewById(R.id.description2);
                                     textView5 = (TextView) findViewById(R.id.cityname);
 
                                     textView5.setText(name);
-                                    textView.setText(getRealTemp(temp));//method to change the passed value to Celius
-                                    textView2.setText(condition);
-                                    textView3.setText(description);
-                                    textView4.setText(icon);
+                                    textView.setText(getRealTemp(temp) +"C");//method to change the passed value to Celius
+                                    textView2.setText(humidity + "%");
+                                    textView3.setText(condition);
+                                    textView4.setText(description);
 
-                                    img = (ImageView) findViewById(R.id.img);
-                                    if (iconData != null && iconData.length > 0) {
-                                        Bitmap wIcon = BitmapFactory.decodeByteArray(iconData, 0, iconData.length);
-                                        img.setImageBitmap(wIcon);
+
+
+                                    if (iconData != null) {
+                                        weatherIcon = (ImageView) findViewById(R.id.weatherImage);
+                                        Bitmap wIcon = iconData;
+                                        weatherIcon.setImageBitmap(wIcon);
 
                                     } else {
                                         Toast.makeText(getApplicationContext(),
@@ -174,9 +176,6 @@ public class CityActivity extends AppCompatActivity {
 
                     }
 
-
-
-
             return null;
         }
 
@@ -185,27 +184,14 @@ public class CityActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
 
-
-
-
-
-
-
-
-
-
-
         }
 
 
     }
 
-
-
     private String getRealTemp(String temp) {
         double dTemp = Math.round(Double.parseDouble(temp) - 273.15);
-        String realTemp = Double.toString(dTemp);
-        return realTemp;
+        return Double.toString(dTemp);
 
     }
 
@@ -220,12 +206,22 @@ public class CityActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.settings:
+                Intent intent = new Intent(CityActivity.this,SettingsActivity.class);
+                startActivity(intent);
 
                 return true;
-            case R.id.info:
+            case R.id.git:
+                Intent intent1 = new Intent();
+                intent1.setAction(Intent.ACTION_VIEW);
+                intent1.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent1.setData(Uri.parse("https://github.com/cblakley/WeatherIO"));
+                startActivity(intent1);
+
 
                 return true;
             case R.id.about:
+                Intent intent2 = new Intent(CityActivity.this,About.class);
+                startActivity(intent2);
 
                 return true;
             default:

@@ -1,10 +1,13 @@
+//Colin Blakley
 package colin.weatherio;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -66,40 +69,22 @@ public class HttpHandler {
         }
         return sb.toString();
     }
-    public byte[] getImage(String code) {
-        HttpURLConnection con = null;
-        InputStream is = null;
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    public Bitmap getImage(String code) {
+            //code from https://medium.com/@crossphd/android-image-loading-from-a-string-url-6c8290b82c5e
         try {
             String IMG_URL = "https://openweathermap.org/img/w/";
-            con = (HttpURLConnection) (new URL(IMG_URL + code + ".png")).openConnection();
+           HttpURLConnection con = (HttpURLConnection) (new URL(IMG_URL + code + ".png")).openConnection();
             con.setRequestMethod("GET");
             con.setDoInput(true);
-            con.setDoOutput(true);
-            con.connect();
+            InputStream input = con.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
 
-            // Let's read the response
-            is = con.getInputStream();
-            byte[] buffer = new byte[1024];
-
-
-            while (is.read(buffer) != -1)
-                baos.write(buffer);
-
-
-        } catch (Throwable t) {
+        } catch (IOException t) {
             t.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (Throwable t) {
-            }
-            try {
-                con.disconnect();
-            } catch (Throwable t) {
-            }
+            return null;
         }
 
-        return baos.toByteArray();
+
     }
 }

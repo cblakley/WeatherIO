@@ -34,19 +34,30 @@
         android:layout_marginTop="50dp"
         android:layout_marginBottom="211dp"
         android:text="@string/CityName"
-        app:layout_constraintBottom_toTopOf="@+id/temp"
+        app:layout_constraintBottom_toTopOf="@+id/temp2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/temp"
         android:layout_width="0dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="28dp"
+        android:text="@string/weatherTemp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/temp2"
+        app:layout_constraintEnd_toStartOf="@+id/temp2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/temp2"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="227dp"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/humidity"
-        app:layout_constraintStart_toStartOf="@+id/humidity"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/weatherTemp"
+        app:layout_constraintBottom_toTopOf="@+id/humidity2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/temp"
         app:layout_constraintTop_toBottomOf="@+id/cityname" />
 
     <TextView
@@ -54,34 +65,72 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="28dp"
-        android:layout_marginEnd="89dp"
         android:layout_marginBottom="4dp"
-        android:text=""
+        android:text="@string/weatherHumidity"
         app:layout_constraintBottom_toTopOf="@+id/main"
-        app:layout_constraintEnd_toStartOf="@+id/weatherImage"
+        app:layout_constraintEnd_toStartOf="@+id/humidity2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temp" />
+        app:layout_constraintTop_toBottomOf="@+id/inputCountry" />
+
+    <TextView
+        android:id="@+id/humidity2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="3dp"
+        android:text="@string/weatherHumidity"
+        app:layout_constraintBottom_toTopOf="@+id/main2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/humidity"
+        app:layout_constraintTop_toBottomOf="@+id/temp2" />
 
     <TextView
         android:id="@+id/main"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="28dp"
         android:layout_marginBottom="4dp"
-        android:text=""
+        android:text="@string/weatherMain"
         app:layout_constraintBottom_toTopOf="@+id/description"
-        app:layout_constraintEnd_toEndOf="@+id/humidity"
-        app:layout_constraintStart_toStartOf="@+id/humidity"
+        app:layout_constraintEnd_toStartOf="@+id/main2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/humidity" />
+
+    <TextView
+        android:id="@+id/main2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="13dp"
+        android:text="@string/weatherMain"
+        app:layout_constraintBottom_toTopOf="@+id/description2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main"
+        app:layout_constraintTop_toBottomOf="@+id/humidity2" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="39dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="38dp"
+        android:text="@string/weatherDesc"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/main"
-        app:layout_constraintStart_toStartOf="@+id/main"
+        app:layout_constraintEnd_toStartOf="@+id/description2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main" />
+
+    <TextView
+        android:id="@+id/description2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="48dp"
+        android:text="@string/weatherDesc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/description"
+        app:layout_constraintTop_toBottomOf="@+id/main2" />
 
     <EditText
         android:id="@+id/inputCity"
@@ -99,11 +148,11 @@
         android:id="@+id/inputCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="65dp"
+        android:layout_marginBottom="124dp"
         android:hint="@string/countryCode"
         android:inputType="text"
         android:maxLength="2"
-        app:layout_constraintBottom_toTopOf="@+id/temp"
+        app:layout_constraintBottom_toTopOf="@+id/humidity"
         app:layout_constraintStart_toStartOf="@+id/content_frame"
         app:layout_constraintTop_toBottomOf="@+id/inputCity" />
 
@@ -118,14 +167,15 @@
 
     <ImageView
         android:id="@+id/weatherImage"
-        android:layout_width="0dp"
+        android:layout_width="97dp"
         android:layout_height="0dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="73dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="@+id/humidity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/humidity"
-        app:layout_constraintTop_toTopOf="@+id/humidity"
-        android:contentDescription="@string/weather_icon" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="12dp"
+        android:contentDescription="@string/weather_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/humidity2"
+        app:layout_constraintEnd_toEndOf="@+id/content_frame"
+        app:layout_constraintStart_toEndOf="@+id/humidity2"
+        app:layout_constraintTop_toBottomOf="@+id/temp2" />
 </android.support.constraint.ConstraintLayout>

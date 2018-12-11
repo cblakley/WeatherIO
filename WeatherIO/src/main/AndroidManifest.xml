@@ -27,9 +27,15 @@
         <activity
             android:name=".CityActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".AddSensor"
-                  android:parentActivityName=".MainActivity"/>
-
+        <activity
+            android:name=".AddSensor"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".About"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>

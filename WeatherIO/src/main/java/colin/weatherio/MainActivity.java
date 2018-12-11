@@ -1,13 +1,11 @@
 /*
 Colin Blakley
-Brandon Lo
-Brian Phan
-
  */
 
 package colin.weatherio;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.view.GravityCompat;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -25,7 +23,7 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-    int[] images={R.drawable.ic_chancerain,R.drawable.ic_clear,R.drawable.ic_snow};
+    int[] images={R.drawable.ic_chancerain,R.drawable.ic_clear,R.drawable.ic_snow,R.drawable.ic_cloudy,R.drawable.ic_rain,R.drawable.ic_partlycloudy};
 
 
     @Override
@@ -106,13 +104,22 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.settings:
+                Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+                startActivity(intent);
 
                 return true;
-            case R.id.info:
+            case R.id.git:
+                Intent intent1 = new Intent();
+                intent1.setAction(Intent.ACTION_VIEW);
+                intent1.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent1.setData(Uri.parse("https://github.com/cblakley/WeatherIO"));
+                startActivity(intent1);
+
 
                 return true;
             case R.id.about:
-
+                Intent intent2 = new Intent(MainActivity.this,About.class);
+                startActivity(intent2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -128,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void displayHomeImage(){
 
-        int x = (int) (Math.random() * 3);
+        int x = (int) (Math.random() * 5);
 
         ImageView img = (ImageView) findViewById(R.id.img);
         img.setImageResource(images[x]);
